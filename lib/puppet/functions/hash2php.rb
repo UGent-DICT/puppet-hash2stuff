@@ -24,12 +24,7 @@ Puppet::Functions.create_function(:hash2php) do
   end
 
   def hash2php(input, options = {})
-    # convert input to structed
-    converted = []
-    input.each do |k,v|
-      converted << { 'name' => k, 'value' => v }
-    end
-
+    converted = call_function('hash2php_settings', input)
     data2php(converted, options)
   end
 
