@@ -8,7 +8,19 @@ Puppet::Functions.create_function(:hash2php_settings) do
   # @return [Hash2stuff::Php_settings] The converted hash as Php_settings.
   #
   # @example Call the function with the $input hash
-  #   hash2php_settings($input)
+  #   hash2php_settings({
+  #     'foo' => 'bar',
+  #     ['nested', 'subkey'] => 'foobar',
+  #   })
+  #   # =>
+  #   [
+  #     { 'name' => 'foo',
+  #       'value' => 'bar',
+  #     },
+  #     { 'name' => ['nested', 'subkey'],
+  #       'value' => 'foobar',
+  #     },
+  #   ]
   #
   dispatch :hash2php_settings do
     param 'Hash', :input

@@ -1,26 +1,157 @@
 # frozen_string_literal: true
 
 # @summary Converts an array of variable (struct name, value) to a php file
+#
+# **Input**:
+#
+# This function can deal with 2 different formats:
+#
+# * A hash with variable names mapped to values
+#   ```puppet
+#   hash2php({
+#     'name1' => 'value1',
+#   })
+#   ```
+#
+# * An array with tuples that represent variables
+#   ```puppet
+#   hash2php([
+#     { 'name'  => 'name1',
+#       'value' => 'value1',
+#     }
+#   ])
+#   ```
+#
+#   This format might be easier to use in combination with hiera when you are using nested assignments.
+#
+# **Variable names**:
+#
+# A variable name can be a single string or it can be an array. If it is an array,
+# the first element will be used as variable name and all other members of the array
+# will be used as sub-keys:
+#
+#   ```puppet
+#   hash2php({['foo', 'bar'] => 'value'})
+#   hash2php([{'name' => ['foo', 'bar'], 'value' => 'value'}])
+#   ```
+#
+# Both above examples would result in a single variable foo with subkey bar:
+#
+#   ```php
+#   $foo['bar'] = 'value';
+#   ```
+# **Options**:
+#
+# Both variants of the function support the same options in the options hash:
+#
+# * **`header`** (`String`):
+#
+#   Configure the header to be shown on top of the file.
+#   No comment markings are added. Make sure to add them yourselves.
+#
+#   Defaults to `// THIS FILE IS CONTROLLED BY PUPPET`
+#
+# * **`php_open`** (`Boolean`): Flag to include the opening `<?php`. Defaults to `true`.
+# * **`php_close`** (`Boolean`): Flag to include the closing `?>`. Defaults to `false`.
+# * **`indent_size`** (`Integer`): How many times to repeat indent_char in each additional indentation level. Defaults to `2`.
+# * **`indent_char`** (`String`): Which character to use when indenting. Defaults to ` ` (space).
+#
+#
 Puppet::Functions.create_function(:hash2php) do
+  # Converts a hash to valid php code (variables)
+  #
+  # Underlying, it uses the hash2php_settings function and calls itself
+  # to generate the actual php code.
+  #
+  # @example Create a php file from php_settings.
+  #   hash2php(
+  #     [
+  #       { 'name' => 'var1',
+  #         'value' => 'value1',
+  #       },
+  #       { 'name' => 'var2',
+  #         'value' => 'value2',
+  #       },
+  #       { 'name' => ['sub1', 'sub2'],
+  #         'value' => 'value3',
+  #       },
+  #       { 'name' => ['sub1', 'sub3'],
+  #         'value' => {'foo' => 'bar'},
+  #       },
+  #     ],
+  #     {'header' => ''}
+  #   )
+  #   # =>
+  #   #################################################################
+  #   # <?php
+  #   #
+  #   # $var1 = 'value1';
+  #   # $var2 = 'value2';
+  #   # $sub1['sub2'] = 'value3';
+  #   # $sub1['sub3'] = array(
+  #   #   'foo' => 'bar',
+  #   # );
+  #
   # @param input
   #   A custom input format that might be more usefull when using from hiera
-  #   It takes an array of Tuples
+  #   It takes an array of hashes with the following keys: `name` and `value`.
   #
   # @param options
   #   A hash of options to control the output.
   #
   # @return [String] PHP code.
-  #
-  # @example Call the function with the $input hash
-  #   hash2php($input)
   dispatch :data2php do
     param 'Hash2stuff::Php_settings', :input
     optional_param 'Hash', :options
+    return_type 'String'
   end
 
+
+  # Convert an array with tuples to valid php code (variables)
+  #
+  # @example Create variables from a hash
+  #   hash2php({
+  #     'var1' => 'value1',
+  #     'var2' => 'value2',
+  #     ['sub1', 'sub2'] => 'value3',
+  #   })
+  #   # =>
+  #   #################################################################
+  #   # <?php
+  #   # // THIS FILE IS CONTROLLED BY PUPPET
+  #   #
+  #   # $var1 = 'value1';
+  #   # $var2 = 'value2';
+  #   # $sub1['sub2'] = 'value3';
+  #
+  # @example Creating an array without file header.
+  #   hash2php(
+  #     {
+  #       'arr' => ['one', 'two', true, 4],
+  #     },
+  #     { 'header' => '' }
+  #   )
+  #   # =>
+  #   #################################################################
+  #   # <?php
+  #   #
+  #   # $arr = array(
+  #   #   'one',
+  #   #   'two',
+  #   #   true,
+  #   #   4,
+  #   # );
+  #
+  # @param input
+  #   A hash with variable and value pairs that are converted to php code.
+  # @param options
+  #   A hash of options to control the output.
+  #
+  # @return [String] PHP code.
   dispatch :hash2php do
     param 'Hash', :input
     optional_param 'Hash', :options
+    return_type 'String'
   end
 
   def hash2php(input, options = {})
