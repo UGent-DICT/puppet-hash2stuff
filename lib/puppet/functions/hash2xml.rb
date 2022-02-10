@@ -23,10 +23,10 @@ Puppet::Functions.create_function(:hash2xml) do
   def kv_to_xml(k, v = nil, level = 0, open = true, close = true)
     output = ''
     output += calc_indent(level)
-    output +="<#{k}>" if open
-    output += v if (open and close)
-    output += "</#{k.split(/\s/, 2)[0]}>" if close
-    output += "\n"
+    output += "<#{k}>" if open
+    output += v if open && close
+    output += "</#{k.split(%r{\s}, 2)[0]}>" if close
+    output + "\n"
   end
 
   def hash_to_xml(input, level = 0, character = "\s", num = 2)
@@ -39,14 +39,14 @@ Puppet::Functions.create_function(:hash2xml) do
         xml += kv_to_xml(key, value, level)
       when Hash
         xml += kv_to_xml(key, nil, level, true, false)
-        xml += hash_to_xml(value, level+1, @character, @num)
+        xml += hash_to_xml(value, level + 1, @character, @num)
         xml += kv_to_xml(key, nil, level, false, true)
       when FalseClass
         xml += kv_to_xml(key, nil, level, true, false)
       else
-        fail('Error')
+        raise ArgumentError, "'hash2xml': unable to convert a value with type %s" % [value.class.name]
       end
     end
-    return xml
+    xml
   end
 end
