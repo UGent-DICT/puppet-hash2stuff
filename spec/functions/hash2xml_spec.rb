@@ -22,6 +22,10 @@ describe 'hash2xml' do
   it { is_expected.to run.with_params({}, {}, {}).and_raise_error(ArgumentError, %r{'hash2xml' expects between 1 and 2 arguments, got 3}) }
   it { is_expected.to run.with_params('some string').and_raise_error(ArgumentError, %r{'hash2xml' parameter 'input'}) }
 
+  it 'fails with unsupported value types' do
+    is_expected.to run.with_params('foo' => true).and_raise_error(ArgumentError, %r{'hash2xml': unable to convert a value with type TrueClass})
+  end
+
   context 'default settings' do
     it 'outputs xml' do
       is_expected.to run.with_params(example_input).and_return(<<-EOS
