@@ -15,10 +15,15 @@
 Puppet::Functions.create_function(:hash2xml) do
   # Converts a hash to a valid xml snippet
   #
+  # When a keypair value is `false`, the tag will not be closed.
+  # When a keypair value is `true`, the short `<tag/>` will be used.
+  #
   # @example Create a xml file
   #   hash2xml({
+  #     '?xml version="1.0" encoding="UTF-8"?' => false,
   #     'collection version="1"' => {
   #       'name' => 'Puppetlabs',
+  #       'no_text attribute="foobar"' => false,
   #       'properties' => {
   #         'foo' => 'bar',
   #         'bar' => 'foo',
@@ -38,6 +43,7 @@ Puppet::Functions.create_function(:hash2xml) do
   #     },
   #   })
   #   # =>
+  #   # <?xml version="1.0" encoding="UTF-8"?>
   #   # <collection version="1">
   #   #   <name>Puppetlabs</name>
   #   #   <properties>
@@ -101,6 +107,8 @@ Puppet::Functions.create_function(:hash2xml) do
         xml += kv_to_xml(key, nil, level, false, true)
       when FalseClass
         xml += kv_to_xml(key, nil, level, true, false)
+      when TrueClass
+        xml += kv_to_xml("#{key}/", nil, level, true, false)
       when Array
         value.each do |v|
           xml += hash_to_xml({ key => v }, level, @character, @num)
