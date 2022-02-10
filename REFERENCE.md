@@ -853,8 +853,10 @@ These options can be used to adjust output.
 
 ```puppet
 hash2xml({
+  '?xml version="1.0" encoding="UTF-8"?' => false,
   'collection version="1"' => {
     'name' => 'Puppetlabs',
+    'no_text attribute="foobar"' => false,
     'properties' => {
       'foo' => 'bar',
       'bar' => 'foo',
@@ -874,6 +876,7 @@ hash2xml({
   },
 })
 # =>
+# <?xml version="1.0" encoding="UTF-8"?>
 # <collection version="1">
 #   <name>Puppetlabs</name>
 #   <properties>
@@ -911,8 +914,10 @@ Returns: `String`
 
 ```puppet
 hash2xml({
+  '?xml version="1.0" encoding="UTF-8"?' => false,
   'collection version="1"' => {
     'name' => 'Puppetlabs',
+    'no_text attribute="foobar"' => false,
     'properties' => {
       'foo' => 'bar',
       'bar' => 'foo',
@@ -932,6 +937,7 @@ hash2xml({
   },
 })
 # =>
+# <?xml version="1.0" encoding="UTF-8"?>
 # <collection version="1">
 #   <name>Puppetlabs</name>
 #   <properties>
