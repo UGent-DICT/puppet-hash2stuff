@@ -1,5 +1,63 @@
+# frozen_string_literal: true
+#
 # Original source: https://github.com/WhatsARanjit/puppet-hash_to_xml
+
+# @summary Converts a hash to a xml snippet.
+#
+# **Options**
+#
+# These options can be used to adjust output.
+#
+# * **`indent_size`** (`Integer`): How many times to repeat indent_char in each additional indentation level. Defaults to `2`.
+# * **`indent_char`** (`String`): Which character to use when indenting. Defaults to ` ` (space).
+# * **`level`** (`Integer`): Indentation level to start at.
+#
 Puppet::Functions.create_function(:hash2xml) do
+  # Converts a hash to a valid xml snippet
+  #
+  # @example Create a xml file
+  #   hash2xml({
+  #     'collection version="1"' => {
+  #       'name' => 'Puppetlabs',
+  #       'properties' => {
+  #         'foo' => 'bar',
+  #         'bar' => 'foo',
+  #       },
+  #       'books' => {
+  #         'book' => [
+  #           {
+  #             "name" => "The Tools for Learning Puppet: Command Line, Vim &amp; Git",
+  #             "url"  => "https://puppet.com/resources/ebook/tools-for-learning-puppet",
+  #           },
+  #           {
+  #             "name" => "DevOps Mythbusting",
+  #             "url"  => "https://puppet.com/resources/ebook/devops-mythbusting",
+  #           },
+  #         ],
+  #       },
+  #     },
+  #   })
+  #   # =>
+  #   # <collection version="1">
+  #   #   <name>Puppetlabs</name>
+  #   #   <properties>
+  #   #     <foo>bar</foo>
+  #   #     <bar>foo</bar>
+  #   #   </properties>
+  #   #   <books>
+  #   #     <book>
+  #   #       <name>The Tools for Learning Puppet: Command Line, Vim &amp; Git</name>
+  #   #       <url>https://puppet.com/resources/ebook/tools-for-learning-puppet</url>
+  #   #     </book>
+  #   #     <book>
+  #   #       <name>DevOps Mythbusting</name>
+  #   #       <url>https://puppet.com/resources/ebook/devops-mythbusting</url>
+  #   #     </book>
+  #   #   </books>
+  #   # </collection>
+  #
+  # @param input A hash to be formatted as xml.
+  # @param options A hash of options to control the output.
   dispatch :hash2xml do
     param 'Hash', :input
     optional_param 'Hash', :options
