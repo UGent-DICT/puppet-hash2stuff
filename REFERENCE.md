@@ -13,36 +13,43 @@
 * [`hash2stuff::hash2ini`](#hash2stuffhash2ini): Defined type provides an implementation of the hash2ini function, creating an INI file from the input hash
 * [`hash2stuff::hash2json`](#hash2stuffhash2json): Defined type provides an implementation of the hash2json function, creating a JSON file from the input hash
 * [`hash2stuff::hash2kv`](#hash2stuffhash2kv): Defined type provides an implementation of the hash2kv function, creating a key-value/shellvar file from the input hash
+* [`hash2stuff::hash2php`](#hash2stuffhash2php): Defined type provides an implementation of the hash2php function, creating a PHP file from the input.
 * [`hash2stuff::hash2properties`](#hash2stuffhash2properties): Defined type provides an implementation of the hash2properties function, creating a Java properties file from the input hash
+* [`hash2stuff::hash2xml`](#hash2stuffhash2xml): Defined type provides an implementation of the hash2xml function, creating a XML File.
 * [`hash2stuff::hash2yaml`](#hash2stuffhash2yaml): Defined type provides an implementation of the hash2yaml function, creating a YAML file from the input hash
 
 ### Functions
 
-* [`hash2ini`](#hash2ini): This converts a puppet hash to an INI string.
-* [`hash2json`](#hash2json): This converts a puppet hash to JSON string.
-* [`hash2kv`](#hash2kv): This converts a puppet hash to an key-value string.
-* [`hash2properties`](#hash2properties): This converts a puppet hash to an properties string.
-* [`hash2yaml`](#hash2yaml): This converts a puppet hash to YAML string.
+* [`hash2ini`](#hash2ini): Converts a puppet hash to INI file string.
+* [`hash2json`](#hash2json): Converts a puppet hash to JSON string.
+* [`hash2kv`](#hash2kv): Converts a puppet hash to key/value (SHELLVAR) file string.
+* [`hash2php`](#hash2php): Converts an array of variable (struct name, value) to a php file
+* [`hash2php_settings`](#hash2php_settings): Converts a hash to a php settings array with structs to use in the hash2php function.
+* [`hash2properties`](#hash2properties): Converts a puppet hash to Java properties file string.
+* [`hash2xml`](#hash2xml): Converts a hash to a xml snippet.
+* [`hash2yaml`](#hash2yaml): Converts a puppet hash to YAML string.
+
+### Data types
+
+* [`Hash2stuff::Php_settings`](#hash2stuffphp_settings): Data type to represent php settings:   [ { 'name'  => 'name1',       'value' => 'value1',     },     {       'name'  => ['name2', 'sub'],    
 
 ## Classes
 
-### `hash2stuff`
+### <a name="hash2stuff"></a>`hash2stuff`
 
 Provide an entry point for module defined types.  The class does nothing without hiera data
 
 #### Parameters
 
-The following parameters are available in the `hash2stuff` class.
+The following parameters are available in the `hash2stuff` class:
 
-##### `hash2ini`
+* [`hash2ini`](#hash2ini)
+* [`hash2json`](#hash2json)
+* [`hash2kv`](#hash2kv)
+* [`hash2properties`](#hash2properties)
+* [`hash2yaml`](#hash2yaml)
 
-Data type: `Hash`
-
-
-
-Default value: `{}`
-
-##### `hash2json`
+##### <a name="hash2ini"></a>`hash2ini`
 
 Data type: `Hash`
 
@@ -50,7 +57,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `hash2kv`
+##### <a name="hash2json"></a>`hash2json`
 
 Data type: `Hash`
 
@@ -58,7 +65,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `hash2properties`
+##### <a name="hash2kv"></a>`hash2kv`
 
 Data type: `Hash`
 
@@ -66,7 +73,15 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `hash2yaml`
+##### <a name="hash2properties"></a>`hash2properties`
+
+Data type: `Hash`
+
+
+
+Default value: `{}`
+
+##### <a name="hash2yaml"></a>`hash2yaml`
 
 Data type: `Hash`
 
@@ -76,7 +91,7 @@ Default value: `{}`
 
 ## Defined types
 
-### `hash2stuff::hash2ini`
+### <a name="hash2stuffhash2ini"></a>`hash2stuff::hash2ini`
 
 Defined type provides an implementation of the hash2ini function, creating an INI file from the input hash
 
@@ -102,21 +117,25 @@ hash2stuff::hash2ini { 'namevar':
 
 #### Parameters
 
-The following parameters are available in the `hash2stuff::hash2ini` defined type.
+The following parameters are available in the `hash2stuff::hash2ini` defined type:
 
-##### `file_props`
+* [`file_props`](#file_props)
+* [`data_hash`](#data_hash)
+* [`options`](#options)
+
+##### <a name="file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### <a name="data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the INI file, to include section names and key/value pairs
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Hash`
 
@@ -124,7 +143,7 @@ Hash of optional values to pass to the "hash2ini" function.  See the function fo
 
 Default value: `{}`
 
-### `hash2stuff::hash2json`
+### <a name="hash2stuffhash2json"></a>`hash2stuff::hash2json`
 
 Defined type provides an implementation of the hash2json function, creating a JSON file from the input hash
 
@@ -150,21 +169,24 @@ hash2stuff::hash2json { 'namevar':
 
 #### Parameters
 
-The following parameters are available in the `hash2stuff::hash2json` defined type.
+The following parameters are available in the `hash2stuff::hash2json` defined type:
 
-##### `file_props`
+* [`file_props`](#file_props)
+* [`data_hash`](#data_hash)
+
+##### <a name="file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### <a name="data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the JSON file.
 
-### `hash2stuff::hash2kv`
+### <a name="hash2stuffhash2kv"></a>`hash2stuff::hash2kv`
 
 Defined type provides an implementation of the hash2kv function, creating a key-value/shellvar file from the input hash
 
@@ -190,21 +212,25 @@ hash2stuff::hash2kv { 'namevar':
 
 #### Parameters
 
-The following parameters are available in the `hash2stuff::hash2kv` defined type.
+The following parameters are available in the `hash2stuff::hash2kv` defined type:
 
-##### `file_props`
+* [`file_props`](#file_props)
+* [`data_hash`](#data_hash)
+* [`options`](#options)
+
+##### <a name="file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### <a name="data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the key-value/shellvar file.
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Hash`
 
@@ -212,7 +238,58 @@ Hash of optional values to pass to the "hash2kv" function.  See function for det
 
 Default value: `{}`
 
-### `hash2stuff::hash2properties`
+### <a name="hash2stuffhash2php"></a>`hash2stuff::hash2php`
+
+Defined type provides an implementation of the hash2php function, creating a PHP file from the input.
+
+#### Examples
+
+##### 
+
+```puppet
+hash2stuff::hash2php { '/path/to/settings.php':
+  file_props => {
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+  }
+  variables  => {
+    'foo' => 'bar',
+    'oof' => 'rab',
+  }
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `hash2stuff::hash2php` defined type:
+
+* [`file_props`](#file_props)
+* [`variables`](#variables)
+* [`options`](#options)
+
+##### <a name="file_props"></a>`file_props`
+
+Data type: `Hash`
+
+Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
+
+##### <a name="variables"></a>`variables`
+
+Data type: `Variant[Hash, Hash2stuff::Php_settings]`
+
+Either a hash or Hash2stuff::Php_settings.
+
+##### <a name="options"></a>`options`
+
+Data type: `Hash`
+
+Hash of optional values to pass to the "hash2php" function.  See function for details.
+
+Default value: `{}`
+
+### <a name="hash2stuffhash2properties"></a>`hash2stuff::hash2properties`
 
 Defined type provides an implementation of the hash2properties function, creating a Java properties file from the input hash
 
@@ -238,21 +315,25 @@ hash2stuff::hash2properties { 'namevar':
 
 #### Parameters
 
-The following parameters are available in the `hash2stuff::hash2properties` defined type.
+The following parameters are available in the `hash2stuff::hash2properties` defined type:
 
-##### `file_props`
+* [`file_props`](#file_props)
+* [`data_hash`](#data_hash)
+* [`options`](#options)
+
+##### <a name="file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### <a name="data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the properties file.
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Hash`
 
@@ -260,7 +341,62 @@ Hash of optional values to pass to the "hash2properties" function.  See function
 
 Default value: `{}`
 
-### `hash2stuff::hash2yaml`
+### <a name="hash2stuffhash2xml"></a>`hash2stuff::hash2xml`
+
+Defined type provides an implementation of the hash2xml function, creating a XML File.
+
+#### Examples
+
+##### 
+
+```puppet
+hash2stuff::hash2xml { '/path/to/settings.xml':
+  file_props => {
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+  },
+  data       => {
+    'properties' => {
+      'foo' => 'bar',
+      'oof' => 'rab',
+    },
+  }
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `hash2stuff::hash2xml` defined type:
+
+* [`file_props`](#file_props)
+* [`data`](#data)
+* [`options`](#options)
+
+##### <a name="file_props"></a>`file_props`
+
+Data type: `Hash`
+
+Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
+
+##### <a name="data"></a>`data`
+
+Data type: `Hash[String, Any]`
+
+A hash to format using xml.
+
+Default value: `{}`
+
+##### <a name="options"></a>`options`
+
+Data type: `Hash`
+
+Hash of optional values to pass to the "hash2php" function.  See function for details.
+
+Default value: `{}`
+
+### <a name="hash2stuffhash2yaml"></a>`hash2stuff::hash2yaml`
 
 Defined type provides an implementation of the hash2yaml function, creating a YAML file from the input hash
 
@@ -286,21 +422,25 @@ hash2stuff::hash2yaml { 'namevar':
 
 #### Parameters
 
-The following parameters are available in the `hash2stuff::hash2yaml` defined type.
+The following parameters are available in the `hash2stuff::hash2yaml` defined type:
 
-##### `file_props`
+* [`file_props`](#file_props)
+* [`data_hash`](#data_hash)
+* [`options`](#options)
+
+##### <a name="file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### <a name="data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the YAML file.
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Hash`
 
@@ -310,63 +450,580 @@ Default value: `{}`
 
 ## Functions
 
-### `hash2ini`
+### <a name="hash2ini"></a>`hash2ini`
 
-Type: Ruby 3.x API
+Type: Ruby 4.x API
 
-This converts a puppet hash to an INI string.
+Converts a puppet hash to INI file string.
 
-#### `hash2ini()`
+#### Examples
 
-This converts a puppet hash to an INI string.
+##### Call the function with the $input and $options hashes
 
-Returns: `Any`
+```puppet
+hash2ini($input, $options)
+```
 
-### `hash2json`
+#### `hash2ini(Hash $input, Optional[Hash] $options)`
 
-Type: Ruby 3.x API
+The hash2ini function.
 
-This converts a puppet hash to JSON string.
+Returns: `String` An INI file formatted string
 
-#### `hash2json()`
+##### Examples
 
-This converts a puppet hash to JSON string.
+###### Call the function with the $input and $options hashes
 
-Returns: `Any`
+```puppet
+hash2ini($input, $options)
+```
 
-### `hash2kv`
+##### `input`
 
-Type: Ruby 3.x API
+Data type: `Hash`
 
-This converts a puppet hash to an key-value string.
+The hash to be converted to INI file
 
-#### `hash2kv()`
+##### `options`
 
-This converts a puppet hash to an key-value string.
+Data type: `Optional[Hash]`
 
-Returns: `Any`
+A hash of options to control INI file format
 
-### `hash2properties`
+### <a name="hash2json"></a>`hash2json`
 
-Type: Ruby 3.x API
+Type: Ruby 4.x API
 
-This converts a puppet hash to an properties string.
+Converts a puppet hash to JSON string.
 
-#### `hash2properties()`
+#### Examples
 
-This converts a puppet hash to an properties string.
+##### Call the function with the $input hash
 
-Returns: `Any`
+```puppet
+hash2json($input)
+```
 
-### `hash2yaml`
+#### `hash2json(Hash $input)`
 
-Type: Ruby 3.x API
+The hash2json function.
 
-This converts a puppet hash to YAML string.
+Returns: `String` A JSON formatted string
 
-#### `hash2yaml()`
+##### Examples
 
-This converts a puppet hash to YAML string.
+###### Call the function with the $input hash
 
-Returns: `Any`
+```puppet
+hash2json($input)
+```
+
+##### `input`
+
+Data type: `Hash`
+
+The hash to be converted to JSON
+
+### <a name="hash2kv"></a>`hash2kv`
+
+Type: Ruby 4.x API
+
+Converts a puppet hash to key/value (SHELLVAR) file string.
+
+#### Examples
+
+##### Call the function with the $input and $options hashes
+
+```puppet
+hash2ini($input, $options)
+```
+
+#### `hash2kv(Hash $input, Optional[Hash] $options)`
+
+The hash2kv function.
+
+Returns: `String` A K/V file formatted string
+
+##### Examples
+
+###### Call the function with the $input and $options hashes
+
+```puppet
+hash2ini($input, $options)
+```
+
+##### `input`
+
+Data type: `Hash`
+
+The hash to be converted to K/V file
+
+##### `options`
+
+Data type: `Optional[Hash]`
+
+A hash of options to control K/V file format
+
+### <a name="hash2php"></a>`hash2php`
+
+Type: Ruby 4.x API
+
+**Input**:
+
+This function can deal with 2 different formats:
+
+* A hash with variable names mapped to values
+  ```puppet
+  hash2php({
+    'name1' => 'value1',
+  })
+  ```
+
+* An array with tuples that represent variables
+  ```puppet
+  hash2php([
+    { 'name'  => 'name1',
+      'value' => 'value1',
+    }
+  ])
+  ```
+
+  This format might be easier to use in combination with hiera when you are using nested assignments.
+
+**Variable names**:
+
+A variable name can be a single string or it can be an array. If it is an array,
+the first element will be used as variable name and all other members of the array
+will be used as sub-keys:
+
+  ```puppet
+  hash2php({['foo', 'bar'] => 'value'})
+  hash2php([{'name' => ['foo', 'bar'], 'value' => 'value'}])
+  ```
+
+Both above examples would result in a single variable foo with subkey bar:
+
+  ```php
+  $foo['bar'] = 'value';
+  ```
+**Options**:
+
+Both variants of the function support the same options in the options hash:
+
+* **`header`** (`String`):
+
+  Configure the header to be shown on top of the file.
+  No comment markings are added. Make sure to add them yourselves.
+
+  Defaults to `// THIS FILE IS CONTROLLED BY PUPPET`
+
+* **`php_open`** (`Boolean`): Flag to include the opening `<?php`. Defaults to `true`.
+* **`php_close`** (`Boolean`): Flag to include the closing `?>`. Defaults to `false`.
+* **`indent_size`** (`Integer`): How many times to repeat indent_char in each additional indentation level. Defaults to `2`.
+* **`indent_char`** (`String`): Which character to use when indenting. Defaults to ` ` (space).
+
+#### `hash2php(Hash2stuff::Php_settings $input, Optional[Hash] $options)`
+
+Converts a hash to valid php code (variables)
+
+Underlying, it uses the hash2php_settings function and calls itself
+to generate the actual php code.
+
+Returns: `String` PHP code.
+
+##### Examples
+
+###### Create a php file from php_settings.
+
+```puppet
+hash2php(
+  [
+    { 'name' => 'var1',
+      'value' => 'value1',
+    },
+    { 'name' => 'var2',
+      'value' => 'value2',
+    },
+    { 'name' => ['sub1', 'sub2'],
+      'value' => 'value3',
+    },
+    { 'name' => ['sub1', 'sub3'],
+      'value' => {'foo' => 'bar'},
+    },
+  ],
+  {'header' => ''}
+)
+# =>
+#################################################################
+# <?php
+#
+# $var1 = 'value1';
+# $var2 = 'value2';
+# $sub1['sub2'] = 'value3';
+# $sub1['sub3'] = array(
+#   'foo' => 'bar',
+# );
+```
+
+##### `input`
+
+Data type: `Hash2stuff::Php_settings`
+
+A custom input format that might be more usefull when using from hiera
+It takes an array of hashes with the following keys: `name` and `value`.
+
+##### `options`
+
+Data type: `Optional[Hash]`
+
+A hash of options to control the output.
+
+#### `hash2php(Hash $input, Optional[Hash] $options)`
+
+Convert an array with tuples to valid php code (variables)
+
+Returns: `String` PHP code.
+
+##### Examples
+
+###### Create variables from a hash
+
+```puppet
+hash2php({
+  'var1' => 'value1',
+  'var2' => 'value2',
+  ['sub1', 'sub2'] => 'value3',
+})
+# =>
+#################################################################
+# <?php
+# // THIS FILE IS CONTROLLED BY PUPPET
+#
+# $var1 = 'value1';
+# $var2 = 'value2';
+# $sub1['sub2'] = 'value3';
+```
+
+###### Creating an array without file header.
+
+```puppet
+hash2php(
+  {
+    'arr' => ['one', 'two', true, 4],
+  },
+  { 'header' => '' }
+)
+# =>
+#################################################################
+# <?php
+#
+# $arr = array(
+#   'one',
+#   'two',
+#   true,
+#   4,
+# );
+```
+
+##### `input`
+
+Data type: `Hash`
+
+A hash with variable and value pairs that are converted to php code.
+
+##### `options`
+
+Data type: `Optional[Hash]`
+
+A hash of options to control the output.
+
+### <a name="hash2php_settings"></a>`hash2php_settings`
+
+Type: Ruby 4.x API
+
+Converts a hash to a php settings array with structs to use in the hash2php function.
+
+#### Examples
+
+##### Call the function with the $input hash
+
+```puppet
+hash2php_settings({
+  'foo' => 'bar',
+  ['nested', 'subkey'] => 'foobar',
+})
+# =>
+[
+  { 'name' => 'foo',
+    'value' => 'bar',
+  },
+  { 'name' => ['nested', 'subkey'],
+    'value' => 'foobar',
+  },
+]
+```
+
+#### `hash2php_settings(Hash $input)`
+
+Converts a hash to a php settings array with structs to use in the hash2php function.
+
+Returns: `Hash2stuff::Php_settings` The converted hash as Php_settings.
+
+##### Examples
+
+###### Call the function with the $input hash
+
+```puppet
+hash2php_settings({
+  'foo' => 'bar',
+  ['nested', 'subkey'] => 'foobar',
+})
+# =>
+[
+  { 'name' => 'foo',
+    'value' => 'bar',
+  },
+  { 'name' => ['nested', 'subkey'],
+    'value' => 'foobar',
+  },
+]
+```
+
+##### `input`
+
+Data type: `Hash`
+
+A hash with keys as variable names and values.
+
+### <a name="hash2properties"></a>`hash2properties`
+
+Type: Ruby 4.x API
+
+Converts a puppet hash to Java properties file string.
+
+#### Examples
+
+##### Call the function with the $input hash
+
+```puppet
+hash2properties($input)
+```
+
+#### `hash2properties(Hash $input, Optional[Hash] $options)`
+
+The hash2properties function.
+
+Returns: `String` A properties formatted string
+
+##### Examples
+
+###### Call the function with the $input hash
+
+```puppet
+hash2properties($input)
+```
+
+##### `input`
+
+Data type: `Hash`
+
+The hash to be converted to properties
+
+##### `options`
+
+Data type: `Optional[Hash]`
+
+A hash of options to control properties file format
+
+### <a name="hash2xml"></a>`hash2xml`
+
+Type: Ruby 4.x API
+
+**Options**
+
+These options can be used to adjust output.
+
+* **`indent_size`** (`Integer`): How many times to repeat indent_char in each additional indentation level. Defaults to `2`.
+* **`indent_char`** (`String`): Which character to use when indenting. Defaults to ` ` (space).
+* **`level`** (`Integer`): Indentation level to start at.
+
+#### Examples
+
+##### Create a xml file
+
+```puppet
+hash2xml({
+  'collection version="1"' => {
+    'name' => 'Puppetlabs',
+    'properties' => {
+      'foo' => 'bar',
+      'bar' => 'foo',
+    },
+    'books' => {
+      'book' => [
+        {
+          "name" => "The Tools for Learning Puppet: Command Line, Vim &amp; Git",
+          "url"  => "https://puppet.com/resources/ebook/tools-for-learning-puppet",
+        },
+        {
+          "name" => "DevOps Mythbusting",
+          "url"  => "https://puppet.com/resources/ebook/devops-mythbusting",
+        },
+      ],
+    },
+  },
+})
+# =>
+# <collection version="1">
+#   <name>Puppetlabs</name>
+#   <properties>
+#     <foo>bar</foo>
+#     <bar>foo</bar>
+#   </properties>
+#   <books>
+#     <book>
+#       <name>The Tools for Learning Puppet: Command Line, Vim &amp; Git</name>
+#       <url>https://puppet.com/resources/ebook/tools-for-learning-puppet</url>
+#     </book>
+#     <book>
+#       <name>DevOps Mythbusting</name>
+#       <url>https://puppet.com/resources/ebook/devops-mythbusting</url>
+#     </book>
+#   </books>
+# </collection>
+```
+
+#### `hash2xml(Hash $input, Optional[Hash] $options)`
+
+**Options**
+
+These options can be used to adjust output.
+
+* **`indent_size`** (`Integer`): How many times to repeat indent_char in each additional indentation level. Defaults to `2`.
+* **`indent_char`** (`String`): Which character to use when indenting. Defaults to ` ` (space).
+* **`level`** (`Integer`): Indentation level to start at.
+
+Returns: `String`
+
+##### Examples
+
+###### Create a xml file
+
+```puppet
+hash2xml({
+  'collection version="1"' => {
+    'name' => 'Puppetlabs',
+    'properties' => {
+      'foo' => 'bar',
+      'bar' => 'foo',
+    },
+    'books' => {
+      'book' => [
+        {
+          "name" => "The Tools for Learning Puppet: Command Line, Vim &amp; Git",
+          "url"  => "https://puppet.com/resources/ebook/tools-for-learning-puppet",
+        },
+        {
+          "name" => "DevOps Mythbusting",
+          "url"  => "https://puppet.com/resources/ebook/devops-mythbusting",
+        },
+      ],
+    },
+  },
+})
+# =>
+# <collection version="1">
+#   <name>Puppetlabs</name>
+#   <properties>
+#     <foo>bar</foo>
+#     <bar>foo</bar>
+#   </properties>
+#   <books>
+#     <book>
+#       <name>The Tools for Learning Puppet: Command Line, Vim &amp; Git</name>
+#       <url>https://puppet.com/resources/ebook/tools-for-learning-puppet</url>
+#     </book>
+#     <book>
+#       <name>DevOps Mythbusting</name>
+#       <url>https://puppet.com/resources/ebook/devops-mythbusting</url>
+#     </book>
+#   </books>
+# </collection>
+```
+
+##### `input`
+
+Data type: `Hash`
+
+A hash to be formatted as xml.
+
+##### `options`
+
+Data type: `Optional[Hash]`
+
+A hash of options to control the output.
+
+### <a name="hash2yaml"></a>`hash2yaml`
+
+Type: Ruby 4.x API
+
+Converts a puppet hash to YAML string.
+
+#### Examples
+
+##### Call the function with the $input hash
+
+```puppet
+hash2yaml($input)
+```
+
+#### `hash2yaml(Hash $input, Optional[Hash] $options)`
+
+The hash2yaml function.
+
+Returns: `String` A YAML formatted string
+
+##### Examples
+
+###### Call the function with the $input hash
+
+```puppet
+hash2yaml($input)
+```
+
+##### `input`
+
+Data type: `Hash`
+
+The hash to be converted to YAML
+
+##### `options`
+
+Data type: `Optional[Hash]`
+
+A hash of options to control YAML file format
+
+## Data types
+
+### <a name="hash2stuffphp_settings"></a>`Hash2stuff::Php_settings`
+
+Data type to represent php settings:
+  [ { 'name'  => 'name1',
+      'value' => 'value1',
+    },
+    {
+      'name'  => ['name2', 'sub'],
+      'value' => 2',
+    },
+    ...
+  ]
+
+Alias of
+
+```puppet
+Array[Struct[{
+  name  => Variant[String[1], Array[String[1], 1]],
+  value => Any,
+}]]
+```
 
