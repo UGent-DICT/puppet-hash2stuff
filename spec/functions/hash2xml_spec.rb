@@ -3,10 +3,12 @@ require 'spec_helper'
 describe 'hash2xml' do
   let(:example_input) do
     {
+      '?xml version="1.0" encoding="UTF-8"?' => false,
       'sheet' => {
         'head' => {
           'title' => 'Test Xml',
         },
+        'meta tag="value"' => true,
         'entries' => {
           'entry' => [
             {
@@ -33,16 +35,18 @@ describe 'hash2xml' do
   it { is_expected.to run.with_params('some string').and_raise_error(ArgumentError, %r{'hash2xml' parameter 'input'}) }
 
   it 'fails with unsupported value types' do
-    is_expected.to run.with_params('foo' => true).and_raise_error(ArgumentError, %r{'hash2xml': unable to convert a value with type TrueClass})
+    is_expected.to run.with_params('foo' => 1.1).and_raise_error(ArgumentError, %r{'hash2xml': unable to convert a value with type Float})
   end
 
   context 'default settings' do
     it 'outputs xml' do
       is_expected.to run.with_params(example_input).and_return(<<-EOS
+<?xml version="1.0" encoding="UTF-8"?>
 <sheet>
   <head>
     <title>Test Xml</title>
   </head>
+  <meta tag="value"/>
   <entries>
     <entry>
       <name>foo</name>
