@@ -1,3 +1,8 @@
+## 2.0.1 (2022-02-10) - TrueFalse
+- Updated to latest pdk template
+- Add true as a possible value for hash2xml
+- Document true/false usage for hash2xml
+
 ## 2.0.0 (2022-02-10) - Fork to UGent
 - Merged (upstream) PR to convert to pdk
 - Monkeypatch rspec-puppet to help with debugging and development
