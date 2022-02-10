@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 # Original source: https://github.com/WhatsARanjit/puppet-hash_to_xml
 
 # @summary Converts a hash to a xml snippet.
