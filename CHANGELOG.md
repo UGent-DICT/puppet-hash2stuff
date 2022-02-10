@@ -1,3 +1,9 @@
+## 2.0.0 (2022-02-10) - Fork to UGent
+- Merged (upstream) PR to convert to pdk
+- Monkeypatch rspec-puppet to help with debugging and development
+- Added hash2xml
+- Added hash2php
+
 ## 1.3.0 (2021-02-28) - Updates contributed by southalc
 - Converted to PDK, linted, validated
 - Add support for Puppet 7
