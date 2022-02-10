@@ -43,6 +43,10 @@ Puppet::Functions.create_function(:hash2xml) do
         xml += kv_to_xml(key, nil, level, false, true)
       when FalseClass
         xml += kv_to_xml(key, nil, level, true, false)
+      when Array
+        value.each do |v|
+          xml += hash_to_xml({ key => v }, level, @character, @num)
+        end
       else
         raise ArgumentError, "'hash2xml': unable to convert a value with type %s" % [value.class.name]
       end

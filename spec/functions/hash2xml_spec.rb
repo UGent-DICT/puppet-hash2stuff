@@ -8,10 +8,20 @@ describe 'hash2xml' do
           'title' => 'Test Xml',
         },
         'entries' => {
-          'entry' => {
-            'name' => 'foo',
-            'tag attribute="foobar"' => 'bar',
-          },
+          'entry' => [
+            {
+              'name' => 'foo',
+              'tag attribute="foobar"' => 'bar',
+            },
+            {
+              'name' => 'bar',
+            },
+            {
+              'more' => {
+                'count' => ['one', 'two', 'three'],
+              },
+            },
+          ],
         },
       },
     }
@@ -37,6 +47,16 @@ describe 'hash2xml' do
     <entry>
       <name>foo</name>
       <tag attribute="foobar">bar</tag>
+    </entry>
+    <entry>
+      <name>bar</name>
+    </entry>
+    <entry>
+      <more>
+        <count>one</count>
+        <count>two</count>
+        <count>three</count>
+      </more>
     </entry>
   </entries>
 </sheet>
