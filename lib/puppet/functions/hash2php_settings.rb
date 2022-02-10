@@ -30,7 +30,7 @@ Puppet::Functions.create_function(:hash2php_settings) do
   def hash2php_settings(input)
     # convert input to structed
     converted = []
-    input.each do |k,v|
+    input.each do |k, v|
       converted << { 'name' => k, 'value' => v }
     end
     converted

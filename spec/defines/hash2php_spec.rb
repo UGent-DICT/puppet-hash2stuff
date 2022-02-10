@@ -24,10 +24,11 @@ describe 'hash2stuff::hash2php' do
       else
         let(:title) { '/tmp/spec_ini.tmp' }
       end
+
       it { is_expected.to compile }
       it do
         is_expected.to contain_file(title).with_content(
-<<-EOS
+          <<-EOS
 <?php
 // THIS FILE IS CONTROLLED BY PUPPET
 
@@ -36,7 +37,7 @@ $nested['subkey'] = array(
   'one',
   'two',
 );
-EOS
+          EOS
         )
       end
     end

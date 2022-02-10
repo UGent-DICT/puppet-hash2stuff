@@ -1,38 +1,43 @@
 require 'spec_helper'
 
 describe 'hash2php' do
-  it { is_expected.not_to eq(nil) }
-  it { is_expected.to run.with_params.and_raise_error(ArgumentError, %r{'hash2php' expects between 1 and 2 arguments, got none}) }
-  it { is_expected.to run.with_params({}, {}, {}).and_raise_error(ArgumentError, %r{'hash2php' expects between 1 and 2 arguments, got 3}) }
-  it { is_expected.to run.with_params('some string').and_raise_error(ArgumentError, %r{'hash2php' parameter 'input'.*Hash2stuff::Php_settings}) }
-
   let(:example_input) do
     [
-      { 'name' => 'simpleString',
+      {
+        'name' => 'simpleString',
         'value' => 'Simple string',
       },
-      { 'name' => ['nested', 'subkey'],
+      {
+        'name' => ['nested', 'subkey'],
         'value' => 'Subvalue',
       },
-      { 'name' => 'myArray',
+      {
+        'name' => 'myArray',
         'value' => ['one', 'two', 'three'],
       },
-      { 'name' => 'myNumber',
+      {
+        'name' => 'myNumber',
         'value' => 13,
       },
-      { 'name' => 'nestedHash',
+      {
+        'name' => 'nestedHash',
         'value' => {
           'subArray' => ['ten', 'nine', 8, 7],
           'subString' => 'foobar',
           'subHash' => {
             'foo' => 'bar',
             'oof' => 'rab',
-            'subsubHash' => {'thats' => 'enough'},
+            'subsubHash' => { 'thats' => 'enough' },
           },
         },
       },
     ]
   end
+
+  it { is_expected.not_to eq(nil) }
+  it { is_expected.to run.with_params.and_raise_error(ArgumentError, %r{'hash2php' expects between 1 and 2 arguments, got none}) }
+  it { is_expected.to run.with_params({}, {}, {}).and_raise_error(ArgumentError, %r{'hash2php' expects between 1 and 2 arguments, got 3}) }
+  it { is_expected.to run.with_params('some string').and_raise_error(ArgumentError, %r{'hash2php' parameter 'input'.*Hash2stuff::Php_settings}) }
 
   context 'default settings' do
     it 'outputs php code' do
@@ -66,7 +71,6 @@ $nestedHash = array(
 );
       EOS
                                                               )
-
     end
   end
 
@@ -101,22 +105,24 @@ $nested['subHash'] = array(
 
   context 'custom settings' do
     let(:example_input) do
-        [{'name' => 'foo', 'value' => 'bar'}]
+      [{ 'name' => 'foo', 'value' => 'bar' }]
     end
 
     context 'header' do
       it 'uses a custom header' do
-        is_expected.to run.with_params(example_input, { 'header' => '/* Custom header set */'})
+        is_expected.to run
+          .with_params(example_input, 'header' => '/* Custom header set */')
           .and_return("<?php\n/* Custom header set */\n\n$foo = 'bar';\n")
       end
       it 'skips an empty header' do
-        is_expected.to run.with_params(example_input, { 'header' => ''}).and_return("<?php\n\n$foo = 'bar';\n")
+        is_expected.to run
+          .with_params(example_input, 'header' => '').and_return("<?php\n\n$foo = 'bar';\n")
       end
     end
 
     context 'php tags' do
       let(:example_input) do
-        [{'name' => 'foo', 'value' => 'bar'}]
+        [{ 'name' => 'foo', 'value' => 'bar' }]
       end
 
       let(:settings) do
@@ -133,14 +139,14 @@ $nested['subHash'] = array(
         end
       end
       describe 'php_close only' do
-        let(:settings) { super().merge({'php_open' => false, 'php_close' => true}) }
+        let(:settings) { super().merge('php_open' => false, 'php_close' => true) }
 
         it 'prints only the close tag' do
           is_expected.to run.with_params(example_input, settings).and_return("$foo = 'bar';\n\n?>\n")
         end
       end
       describe 'both off' do
-        let(:settings) { super().merge({'php_open' => false, 'php_close' => false}) }
+        let(:settings) { super().merge('php_open' => false, 'php_close' => false) }
 
         it 'prints no tags' do
           is_expected.to run.with_params(example_input, settings).and_return("$foo = 'bar';\n")
@@ -159,7 +165,7 @@ $nested['subHash'] = array(
                 'sub' => 'value',
               },
             },
-          }
+          },
         ]
       end
 
@@ -172,7 +178,7 @@ $nested['subHash'] = array(
       end
 
       describe 'custom indent size' do
-        let(:settings) { super().merge({'indent_size' => 4}) }
+        let(:settings) { super().merge('indent_size' => 4) }
 
         it 'uses correct indent size' do
           is_expected.to run.with_params(example_input, settings).and_return(
@@ -194,7 +200,7 @@ $foo = array(
       end
 
       describe 'custom indent character' do
-        let(:settings) { super().merge({'indent_char' => "\t" }) }
+        let(:settings) { super().merge('indent_char' => "\t") }
 
         it 'uses correct indent character' do
           is_expected.to run.with_params(example_input, settings).and_return(
@@ -217,4 +223,3 @@ $foo = array(
     end
   end
 end
-

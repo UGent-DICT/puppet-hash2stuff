@@ -106,7 +106,6 @@ Puppet::Functions.create_function(:hash2php) do
     return_type 'String'
   end
 
-
   # Convert an array with tuples to valid php code (variables)
   #
   # @example Create variables from a hash
@@ -178,23 +177,23 @@ Puppet::Functions.create_function(:hash2php) do
     if settings['php_open']
       output << '<?php'
     end
-    if settings['header'] and settings['header'].length > 0
+    if settings['header'] && !settings['header'].empty?
       output << settings['header']
     end
-    if settings['php_open'] or (settings['header'] and settings['header'].length > 0)
+    if settings['php_open'] || (settings['header'] && !settings['header'].empty?)
       output << ''
     end
     input.each do |var|
       # If the key is an array, use the first part as the variable name
       # All other parts are nested keys in a hash
-      _varname = [ var['name'] ].flatten
-      varname = _varname[0]
-      sub = _varname[1..-1]
+      varname_arr = [var['name']].flatten
+      varname = varname_arr[0]
+      sub = varname_arr[1..-1]
 
       line = []
-      line << sprintf('$%{varname}', varname: varname)
+      line << '$%{varname}' % { varname: varname }
 
-      if sub and sub.length > 0
+      if sub && !sub.empty?
         line << "['"
         line << sub.join("']['")
         line << "']"
@@ -213,9 +212,9 @@ Puppet::Functions.create_function(:hash2php) do
   end
 
   def php_settings_value(settings, value, level = 0)
-    _indent = settings['indent_char'] * settings['indent_size'].to_i
-    prefix = _indent.to_s * level
-    nprefix = _indent.to_s * (level + 1)
+    indent = settings['indent_char'] * settings['indent_size'].to_i
+    prefix = indent.to_s * level
+    nprefix = indent.to_s * (level + 1)
 
     output = []
     case value
@@ -226,13 +225,13 @@ Puppet::Functions.create_function(:hash2php) do
     when Array
       output << 'array('
       value.each do |v|
-        output << sprintf("\n%{prefix}%{value},", prefix: nprefix, value: php_settings_value(settings, v, level + 1))
+        output << "\n%{prefix}%{value}," % { prefix: nprefix, value: php_settings_value(settings, v, level + 1) }
       end
       output << "\n#{prefix})"
     when Hash
       output << 'array('
-      value.each do |k,v|
-        output << sprintf("\n%{prefix}%{key} => %{value},", prefix: nprefix, key: "'#{k}'" ,value: php_settings_value(settings, v, level + 1))
+      value.each do |k, v|
+        output << "\n%{prefix}%{key} => %{value}," % { prefix: nprefix, key: "'#{k}'", value: php_settings_value(settings, v, level + 1) }
       end
       output << "\n#{prefix})"
     end
