@@ -23,7 +23,7 @@ Puppet::Functions.create_function(:hash2xml) do
   #     '?xml version="1.0" encoding="UTF-8"?' => false,
   #     'collection version="1"' => {
   #       'name' => 'Puppetlabs',
-  #       'no_text attribute="foobar"' => false,
+  #       'no_text attribute="foobar"' => true,
   #       'properties' => {
   #         'foo' => 'bar',
   #         'bar' => 'foo',
@@ -46,6 +46,7 @@ Puppet::Functions.create_function(:hash2xml) do
   #   # <?xml version="1.0" encoding="UTF-8"?>
   #   # <collection version="1">
   #   #   <name>Puppetlabs</name>
+  #   #   <no_text attribute="foobar"/>
   #   #   <properties>
   #   #     <foo>bar</foo>
   #   #     <bar>foo</bar>
