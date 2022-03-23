@@ -160,11 +160,12 @@ Puppet::Functions.create_function(:hash2php) do
 
   def data2php(input, options = {})
     settings = {
-      'header'      => '// THIS FILE IS CONTROLLED BY PUPPET',
-      'indent_size' => 2,
-      'indent_char' => ' ',
-      'php_open'    => true,
-      'php_close'   => false,
+      'header'        => '// THIS FILE IS CONTROLLED BY PUPPET',
+      'indent_size'   => 2,
+      'indent_char'   => ' ',
+      'php_open'      => true,
+      'php_close'     => false,
+      'php_constants' => false,
     }
     settings.merge!(options)
     php_settings(settings, input)
@@ -191,17 +192,22 @@ Puppet::Functions.create_function(:hash2php) do
       sub = varname_arr[1..-1]
 
       line = []
-      line << '$%{varname}' % { varname: varname }
+      if settings['php_constants']
+        line << 'define("%{varname}", %{value});' % { varname: varname.upcase, value: php_settings_value(settings, var['value']) }
+      else
+        line << '$%{varname}' % { varname: varname }
 
-      if sub && !sub.empty?
-        line << "['"
-        line << sub.join("']['")
-        line << "']"
+        if sub && !sub.empty?
+          line << "['"
+          line << sub.join("']['")
+          line << "']"
+        end
+
+        line << ' = '
+        line << php_settings_value(settings, var['value'])
+        line << ';'
       end
 
-      line << ' = '
-      line << php_settings_value(settings, var['value'])
-      line << ';'
       output << line.join('')
     end
     if settings['php_close']
