@@ -154,6 +154,29 @@ $nested['subHash'] = array(
       end
     end
 
+    context 'php constants' do
+      let(:example_input) do
+        [{ 'name' => 'foo', 'value' => 'bar' }]
+      end
+
+      let(:settings) do
+        {
+          'php_constants' => true,
+        }
+      end
+
+      it 'uses php constants instead of variables' do
+        is_expected.to run.with_params(example_input, settings).and_return(
+            <<-EOS
+<?php
+// THIS FILE IS CONTROLLED BY PUPPET
+
+define("FOO", 'bar');
+            EOS
+        )
+      end
+    end
+
     context 'indent' do
       let(:example_input) do
         [
