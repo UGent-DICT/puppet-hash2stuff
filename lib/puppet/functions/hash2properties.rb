@@ -12,7 +12,7 @@ Puppet::Functions.create_function(:hash2properties) do
 
   def properties(input, options = {})
     settings = {
-      'header'            => '# THIS FILE IS CONTROLLED BY PUPPET',
+      'header'            => nil,
       'key_val_separator' => '=',
       'quote_char'        => '',
       'list_separator'    => ',',
@@ -46,8 +46,11 @@ Puppet::Functions.create_function(:hash2properties) do
     end
 
     properties_str.sort! { |x, y| String(x) <=> String(y) }
-    properties_str.insert(0, settings['header'], '')
-    properties_str << ''
+
+    if settings['header']
+      properties_str.insert(0, settings['header'], '')
+      properties_str << ''
+    end
 
     properties_str.join("\n")
   end

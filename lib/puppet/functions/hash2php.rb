@@ -160,7 +160,7 @@ Puppet::Functions.create_function(:hash2php) do
 
   def data2php(input, options = {})
     settings = {
-      'header'        => '// THIS FILE IS CONTROLLED BY PUPPET',
+      'header'        => nil,
       'indent_size'   => 2,
       'indent_char'   => ' ',
       'php_open'      => true,

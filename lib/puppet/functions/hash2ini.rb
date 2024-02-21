@@ -12,7 +12,7 @@ Puppet::Functions.create_function(:hash2ini) do
 
   def ini(input, options = {})
     settings = {
-      'header'            => '# THIS FILE IS CONTROLLED BY PUPPET',
+      'header'            => nil,
       'section_prefix'    => '[',
       'section_suffix'    => ']',
       'key_val_separator' => '=',
@@ -24,7 +24,7 @@ Puppet::Functions.create_function(:hash2ini) do
     settings.merge!(options)
 
     output = []
-    output << settings['header'] << nil
+    output << settings['header'] << nil if settings['header']
     input.keys.each do |section|
       output << "#{settings['section_prefix']}#{section}#{settings['section_suffix']}"
       input[section].each do |k, v|
