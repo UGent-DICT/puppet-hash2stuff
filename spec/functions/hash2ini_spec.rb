@@ -20,8 +20,6 @@ describe 'hash2ini' do
 
   context 'default settings' do
     output = <<-EOS
-# THIS FILE IS CONTROLLED BY PUPPET
-
 [main]
 logging="INFO"
 limit="314"
@@ -63,8 +61,6 @@ EOS
       'quote_numerics' => false,
     }
     output = <<-EOS
-# THIS FILE IS CONTROLLED BY PUPPET
-
 [main]
 logging="INFO"
 limit=314

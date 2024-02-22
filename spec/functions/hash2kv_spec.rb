@@ -14,8 +14,6 @@ describe 'hash2kv' do
 
   context 'no custom settings' do
     output = <<-EOS
-# THIS FILE IS CONTROLLED BY PUPPET
-
 HOSTNAME="foo.example.com"
 RSYNC_IONICE="3"
 PORTS="53 123 80"

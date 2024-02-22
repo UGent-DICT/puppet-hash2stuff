@@ -31,8 +31,7 @@ define hash2stuff::hash2xml (
   Hash[String, Any] $data = {},
   Hash $options = {},
 ) {
-
-  File {$name:
-    * => merge($file_props, {'content' => hash2xml($data, $options)}),
+  File { $name:
+    * => merge($file_props, { 'content' => hash2xml($data, $options) }),
   }
 }

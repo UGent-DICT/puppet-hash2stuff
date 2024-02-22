@@ -26,7 +26,7 @@ define hash2stuff::hash2json (
   Hash $file_props,
   Hash $data_hash,
 ) {
-  File {$name:
+  File { $name:
     * => merge($file_props, content => hash2json($data_hash)),
   }
 }

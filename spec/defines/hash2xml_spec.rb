@@ -23,7 +23,7 @@ describe 'hash2stuff::hash2xml' do
     context "on #{os}" do
       let(:facts) { os_facts }
 
-      if os =~ %r{windows}i
+      if %r{windows}i.match?(os)
         let(:title) { 'C:\\Temp\\spec_ini.tmp' }
       else
         let(:title) { '/tmp/spec_ini.tmp' }
@@ -32,7 +32,7 @@ describe 'hash2stuff::hash2xml' do
       it { is_expected.to compile }
       it do
         is_expected.to contain_file(title).with_content(
-          <<-EOS
+          <<-EOS,
 <properties>
   <foo>bar</foo>
   <entries>

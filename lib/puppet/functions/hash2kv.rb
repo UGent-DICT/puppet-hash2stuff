@@ -12,7 +12,7 @@ Puppet::Functions.create_function(:hash2kv) do
 
   def kv(input, options = {})
     settings = {
-      'header'            => '# THIS FILE IS CONTROLLED BY PUPPET',
+      'header'            => nil,
       'key_val_separator' => '=',
       'quote_char'        => '"',
     }
@@ -20,7 +20,7 @@ Puppet::Functions.create_function(:hash2kv) do
     settings.merge!(options)
 
     output = []
-    output << settings['header'] << nil
+    output << settings['header'] << nil if settings['header']
     input.each do |k, v|
       output << "#{k}#{settings['key_val_separator']}#{settings['quote_char']}#{v}#{settings['quote_char']}"
     end

@@ -18,7 +18,7 @@ describe 'hash2stuff::hash2kv' do
     context "on #{os}" do
       let(:facts) { os_facts }
 
-      if os =~ %r{windows}i
+      if %r{windows}i.match?(os)
         let(:title) { 'C:\\Temp\\spec_ini.tmp' }
       else
         let(:title) { '/tmp/spec_ini.tmp' }

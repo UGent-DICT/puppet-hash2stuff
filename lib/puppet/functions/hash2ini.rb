@@ -25,7 +25,7 @@ Puppet::Functions.create_function(:hash2ini) do
 
     output = []
     output << settings['header'] << nil if settings['header']
-    input.keys.each do |section|
+    input.each_key do |section|
       output << "#{settings['section_prefix']}#{section}#{settings['section_suffix']}"
       input[section].each do |k, v|
         v_is_a_boolean = (v.is_a?(TrueClass) || v.is_a?(FalseClass))

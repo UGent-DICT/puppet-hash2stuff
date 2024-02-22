@@ -41,9 +41,8 @@ describe 'hash2php' do
 
   context 'default settings' do
     it 'outputs php code' do
-      is_expected.to run.with_params(example_input).and_return(<<-EOS
+      is_expected.to run.with_params(example_input).and_return(<<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 $simpleString = 'Simple string';
 $nested['subkey'] = 'Subvalue';
@@ -88,9 +87,8 @@ $nestedHash = array(
 
     it do
       is_expected.to run.with_params(example_input).and_return(
-        <<-EOS
+        <<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 $simpleString = 'Simple String';
 $nested['subKey'] = 'Subvalue';
@@ -167,13 +165,12 @@ $nested['subHash'] = array(
 
       it 'uses php constants instead of variables' do
         is_expected.to run.with_params(example_input, settings).and_return(
-            <<-EOS
+            <<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 define("FOO", 'bar');
             EOS
-        )
+          )
       end
     end
 
@@ -205,7 +202,7 @@ define("FOO", 'bar');
 
         it 'uses correct indent size' do
           is_expected.to run.with_params(example_input, settings).and_return(
-            <<-EOS
+            <<-EOS,
 <?php
 
 $foo = array(
@@ -227,7 +224,7 @@ $foo = array(
 
         it 'uses correct indent character' do
           is_expected.to run.with_params(example_input, settings).and_return(
-            <<-EOS
+            <<-EOS,
 <?php
 
 $foo = array(

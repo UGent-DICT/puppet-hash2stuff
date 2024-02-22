@@ -30,7 +30,7 @@ define hash2stuff::hash2yaml (
   Hash $data_hash,
   Hash $options = {},
 ) {
-  File {$name:
+  File { $name:
     * => merge($file_props, content => hash2yaml($data_hash, $options)),
   }
 }
