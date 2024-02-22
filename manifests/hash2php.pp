@@ -29,8 +29,7 @@ define hash2stuff::hash2php (
   Variant[Hash, Hash2stuff::Php_settings] $variables,
   Hash $options = {},
 ) {
-
-  File {$name:
-    * => merge($file_props, {'content' => hash2php($variables, $options)}),
+  File { $name:
+    * => merge($file_props, { 'content' => hash2php($variables, $options) }),
   }
 }

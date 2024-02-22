@@ -73,4 +73,3 @@ end
 
 # 'spec_overrides' from sync.yml will appear below this line
 require 'spec_helper_diffs'
-

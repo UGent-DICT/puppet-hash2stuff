@@ -40,7 +40,7 @@ describe 'hash2xml' do
 
   context 'default settings' do
     it 'outputs xml' do
-      is_expected.to run.with_params(example_input).and_return(<<-EOS
+      is_expected.to run.with_params(example_input).and_return(<<-EOS,
 <?xml version="1.0" encoding="UTF-8"?>
 <sheet>
   <head>
@@ -94,7 +94,7 @@ describe 'hash2xml' do
 
       it 'starts at correct level' do
         is_expected.to run.with_params(example_input, settings).and_return(
-          <<-EOS
+          <<-EOS,
     <entry>foo</entry>
     <nest>
       <entry>bar</entry>
@@ -113,7 +113,7 @@ describe 'hash2xml' do
 
         it 'uses correct indent size' do
           is_expected.to run.with_params(example_input, settings).and_return(
-            <<-EOS
+            <<-EOS,
 <entry>foo</entry>
 <nest>
     <entry>bar</entry>
@@ -131,7 +131,7 @@ describe 'hash2xml' do
 
         it 'uses correct indent character' do
           is_expected.to run.with_params(example_input, settings).and_return(
-            <<-EOS
+            <<-EOS,
 <entry>foo</entry>
 <nest>
 \t\t<entry>bar</entry>
