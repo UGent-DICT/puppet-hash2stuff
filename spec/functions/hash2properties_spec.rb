@@ -31,8 +31,6 @@ describe 'hash2properties' do
 
   context 'no custom settings' do
     output = <<-EOS
-# THIS FILE IS CONTROLLED BY PUPPET
-
 dev.log_location=/var/log/dev.log
 dev.logging=DEBUG
 main.awesome=true

@@ -30,7 +30,6 @@ describe 'hash2stuff::hash2php' do
         is_expected.to contain_file(title).with_content(
           <<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 $foo = 'bar';
 $nested['subkey'] = array(

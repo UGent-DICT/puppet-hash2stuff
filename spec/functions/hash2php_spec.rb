@@ -43,7 +43,6 @@ describe 'hash2php' do
     it 'outputs php code' do
       is_expected.to run.with_params(example_input).and_return(<<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 $simpleString = 'Simple string';
 $nested['subkey'] = 'Subvalue';
@@ -90,7 +89,6 @@ $nestedHash = array(
       is_expected.to run.with_params(example_input).and_return(
         <<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 $simpleString = 'Simple String';
 $nested['subKey'] = 'Subvalue';
@@ -169,7 +167,6 @@ $nested['subHash'] = array(
         is_expected.to run.with_params(example_input, settings).and_return(
             <<-EOS,
 <?php
-// THIS FILE IS CONTROLLED BY PUPPET
 
 define("FOO", 'bar');
             EOS
