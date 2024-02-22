@@ -1,3 +1,7 @@
+## 2.0.2 (2022-03-28)
+- hash2php: Allow using PHP global constants
+- Fix small mistake in docs for hash2xml
+
 ## 2.0.1 (2022-02-10) - TrueFalse
 - Updated to latest pdk template
 - Add true as a possible value for hash2xml

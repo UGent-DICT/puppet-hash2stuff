@@ -1,6 +1,6 @@
 {
   "name": "mmckinst-hash2stuff",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "mmckinst",
   "summary": "Convert a puppet hash to YAML, JSON, INI, XML, PHP file, or key-value.",
   "license": "Apache-2.0",
@@ -64,7 +64,7 @@
     "kv",
     "key-value"
   ],
-  "pdk-version": "2.1.1",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#2.1.1",
-  "template-ref": "tags/2.1.1-0-g03daa92"
+  "pdk-version": "3.0.1",
+  "template-url": "https://github.com/puppetlabs/pdk-templates#3.0.1",
+  "template-ref": "tags/3.0.1-0-gd13288a"
 }
