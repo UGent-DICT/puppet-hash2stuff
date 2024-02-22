@@ -47,10 +47,9 @@ Puppet::Functions.create_function(:hash2properties) do
 
     properties_str.sort! { |x, y| String(x) <=> String(y) }
 
-    if settings['header']
-      properties_str.insert(0, settings['header'], '')
-      properties_str << ''
-    end
+    properties_str.insert(0, settings['header'], '') if settings['header']
+
+    properties_str << ''
 
     properties_str.join("\n")
   end
