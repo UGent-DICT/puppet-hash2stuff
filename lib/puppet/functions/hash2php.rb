@@ -51,6 +51,13 @@
 #
 #   Defaults to `// THIS FILE IS CONTROLLED BY PUPPET`
 #
+# * **`footer`** (`String`):
+#
+#   Configure the footer to be shown at the bottom of the file.
+#   No comment markings are added. Make sure to add them yourselves.
+#
+#   Defaults to `nil` (no footer)
+#
 # * **`php_open`** (`Boolean`): Flag to include the opening `<?php`. Defaults to `true`.
 # * **`php_close`** (`Boolean`): Flag to include the closing `?>`. Defaults to `false`.
 # * **`indent_size`** (`Integer`): How many times to repeat indent_char in each additional indentation level. Defaults to `2`.
@@ -161,6 +168,7 @@ Puppet::Functions.create_function(:hash2php) do
   def data2php(input, options = {})
     settings = {
       'header'        => nil,
+      'footer'        => nil,
       'indent_size'   => 2,
       'indent_char'   => ' ',
       'php_open'      => true,
@@ -209,6 +217,10 @@ Puppet::Functions.create_function(:hash2php) do
       end
 
       output << line.join('')
+    end
+    if settings['footer'] && !settings['footer'].empty?
+      output << ''
+      output << settings['footer']
     end
     if settings['php_close']
       output << "\n?>"
