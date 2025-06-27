@@ -118,6 +118,23 @@ $nested['subHash'] = array(
       end
     end
 
+    context 'footer' do
+      it 'uses a custom footer' do
+        is_expected.to run
+          .with_params(example_input, 'footer' => '/* Custom footer set */')
+          .and_return("<?php\n\n$foo = 'bar';\n\n/* Custom footer set */\n")
+      end
+      it 'skips an empty footer' do
+        is_expected.to run
+          .with_params(example_input, 'footer' => '').and_return("<?php\n\n$foo = 'bar';\n")
+      end
+      it 'uses both header and footer' do
+        is_expected.to run
+          .with_params(example_input, 'header' => '/* Header */', 'footer' => '/* Footer */')
+          .and_return("<?php\n/* Header */\n\n$foo = 'bar';\n\n/* Footer */\n")
+      end
+    end
+
     context 'php tags' do
       let(:example_input) do
         [{ 'name' => 'foo', 'value' => 'bar' }]

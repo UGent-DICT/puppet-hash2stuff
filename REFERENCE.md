@@ -10,13 +10,13 @@
 
 ### Defined types
 
-* [`hash2stuff::hash2ini`](#hash2stuffhash2ini): Defined type provides an implementation of the hash2ini function, creating an INI file from the input hash
-* [`hash2stuff::hash2json`](#hash2stuffhash2json): Defined type provides an implementation of the hash2json function, creating a JSON file from the input hash
-* [`hash2stuff::hash2kv`](#hash2stuffhash2kv): Defined type provides an implementation of the hash2kv function, creating a key-value/shellvar file from the input hash
-* [`hash2stuff::hash2php`](#hash2stuffhash2php): Defined type provides an implementation of the hash2php function, creating a PHP file from the input.
-* [`hash2stuff::hash2properties`](#hash2stuffhash2properties): Defined type provides an implementation of the hash2properties function, creating a Java properties file from the input hash
-* [`hash2stuff::hash2xml`](#hash2stuffhash2xml): Defined type provides an implementation of the hash2xml function, creating a XML File.
-* [`hash2stuff::hash2yaml`](#hash2stuffhash2yaml): Defined type provides an implementation of the hash2yaml function, creating a YAML file from the input hash
+* [`hash2stuff::hash2ini`](#hash2stuff--hash2ini): Defined type provides an implementation of the hash2ini function, creating an INI file from the input hash
+* [`hash2stuff::hash2json`](#hash2stuff--hash2json): Defined type provides an implementation of the hash2json function, creating a JSON file from the input hash
+* [`hash2stuff::hash2kv`](#hash2stuff--hash2kv): Defined type provides an implementation of the hash2kv function, creating a key-value/shellvar file from the input hash
+* [`hash2stuff::hash2php`](#hash2stuff--hash2php): Defined type provides an implementation of the hash2php function, creating a PHP file from the input.
+* [`hash2stuff::hash2properties`](#hash2stuff--hash2properties): Defined type provides an implementation of the hash2properties function, creating a Java properties file from the input hash
+* [`hash2stuff::hash2xml`](#hash2stuff--hash2xml): Defined type provides an implementation of the hash2xml function, creating a XML File.
+* [`hash2stuff::hash2yaml`](#hash2stuff--hash2yaml): Defined type provides an implementation of the hash2yaml function, creating a YAML file from the input hash
 
 ### Functions
 
@@ -31,7 +31,7 @@
 
 ### Data types
 
-* [`Hash2stuff::Php_settings`](#hash2stuffphp_settings): Data type to represent php settings:   [ { 'name'  => 'name1',       'value' => 'value1',     },     {       'name'  => ['name2', 'sub'],    
+* [`Hash2stuff::Php_settings`](#Hash2stuff--Php_settings): Data type to represent php settings:   [ { 'name'  => 'name1',       'value' => 'value1',     },     {       'name'  => ['name2', 'sub'],    
 
 ## Classes
 
@@ -43,55 +43,55 @@ Provide an entry point for module defined types.  The class does nothing without
 
 The following parameters are available in the `hash2stuff` class:
 
-* [`hash2ini`](#hash2ini)
-* [`hash2json`](#hash2json)
-* [`hash2kv`](#hash2kv)
-* [`hash2properties`](#hash2properties)
-* [`hash2yaml`](#hash2yaml)
+* [`hash2ini`](#-hash2stuff--hash2ini)
+* [`hash2json`](#-hash2stuff--hash2json)
+* [`hash2kv`](#-hash2stuff--hash2kv)
+* [`hash2properties`](#-hash2stuff--hash2properties)
+* [`hash2yaml`](#-hash2stuff--hash2yaml)
 
-##### <a name="hash2ini"></a>`hash2ini`
+##### <a name="-hash2stuff--hash2ini"></a>`hash2ini`
 
 Data type: `Hash`
 
-
+Convert hash into ini.
 
 Default value: `{}`
 
-##### <a name="hash2json"></a>`hash2json`
+##### <a name="-hash2stuff--hash2json"></a>`hash2json`
 
 Data type: `Hash`
 
-
+Convert hash into json.
 
 Default value: `{}`
 
-##### <a name="hash2kv"></a>`hash2kv`
+##### <a name="-hash2stuff--hash2kv"></a>`hash2kv`
 
 Data type: `Hash`
 
-
+Convert hash into key-values.
 
 Default value: `{}`
 
-##### <a name="hash2properties"></a>`hash2properties`
+##### <a name="-hash2stuff--hash2properties"></a>`hash2properties`
 
 Data type: `Hash`
 
-
+Convert hash into properties.
 
 Default value: `{}`
 
-##### <a name="hash2yaml"></a>`hash2yaml`
+##### <a name="-hash2stuff--hash2yaml"></a>`hash2yaml`
 
 Data type: `Hash`
 
-
+Convert hash into yaml.
 
 Default value: `{}`
 
 ## Defined types
 
-### <a name="hash2stuffhash2ini"></a>`hash2stuff::hash2ini`
+### <a name="hash2stuff--hash2ini"></a>`hash2stuff::hash2ini`
 
 Defined type provides an implementation of the hash2ini function, creating an INI file from the input hash
 
@@ -119,23 +119,23 @@ hash2stuff::hash2ini { 'namevar':
 
 The following parameters are available in the `hash2stuff::hash2ini` defined type:
 
-* [`file_props`](#file_props)
-* [`data_hash`](#data_hash)
-* [`options`](#options)
+* [`file_props`](#-hash2stuff--hash2ini--file_props)
+* [`data_hash`](#-hash2stuff--hash2ini--data_hash)
+* [`options`](#-hash2stuff--hash2ini--options)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2ini--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="data_hash"></a>`data_hash`
+##### <a name="-hash2stuff--hash2ini--data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the INI file, to include section names and key/value pairs
 
-##### <a name="options"></a>`options`
+##### <a name="-hash2stuff--hash2ini--options"></a>`options`
 
 Data type: `Hash`
 
@@ -143,7 +143,7 @@ Hash of optional values to pass to the "hash2ini" function.  See the function fo
 
 Default value: `{}`
 
-### <a name="hash2stuffhash2json"></a>`hash2stuff::hash2json`
+### <a name="hash2stuff--hash2json"></a>`hash2stuff::hash2json`
 
 Defined type provides an implementation of the hash2json function, creating a JSON file from the input hash
 
@@ -171,22 +171,22 @@ hash2stuff::hash2json { 'namevar':
 
 The following parameters are available in the `hash2stuff::hash2json` defined type:
 
-* [`file_props`](#file_props)
-* [`data_hash`](#data_hash)
+* [`file_props`](#-hash2stuff--hash2json--file_props)
+* [`data_hash`](#-hash2stuff--hash2json--data_hash)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2json--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="data_hash"></a>`data_hash`
+##### <a name="-hash2stuff--hash2json--data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the JSON file.
 
-### <a name="hash2stuffhash2kv"></a>`hash2stuff::hash2kv`
+### <a name="hash2stuff--hash2kv"></a>`hash2stuff::hash2kv`
 
 Defined type provides an implementation of the hash2kv function, creating a key-value/shellvar file from the input hash
 
@@ -214,23 +214,23 @@ hash2stuff::hash2kv { 'namevar':
 
 The following parameters are available in the `hash2stuff::hash2kv` defined type:
 
-* [`file_props`](#file_props)
-* [`data_hash`](#data_hash)
-* [`options`](#options)
+* [`file_props`](#-hash2stuff--hash2kv--file_props)
+* [`data_hash`](#-hash2stuff--hash2kv--data_hash)
+* [`options`](#-hash2stuff--hash2kv--options)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2kv--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="data_hash"></a>`data_hash`
+##### <a name="-hash2stuff--hash2kv--data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the key-value/shellvar file.
 
-##### <a name="options"></a>`options`
+##### <a name="-hash2stuff--hash2kv--options"></a>`options`
 
 Data type: `Hash`
 
@@ -238,7 +238,7 @@ Hash of optional values to pass to the "hash2kv" function.  See function for det
 
 Default value: `{}`
 
-### <a name="hash2stuffhash2php"></a>`hash2stuff::hash2php`
+### <a name="hash2stuff--hash2php"></a>`hash2stuff::hash2php`
 
 Defined type provides an implementation of the hash2php function, creating a PHP file from the input.
 
@@ -265,23 +265,23 @@ hash2stuff::hash2php { '/path/to/settings.php':
 
 The following parameters are available in the `hash2stuff::hash2php` defined type:
 
-* [`file_props`](#file_props)
-* [`variables`](#variables)
-* [`options`](#options)
+* [`file_props`](#-hash2stuff--hash2php--file_props)
+* [`variables`](#-hash2stuff--hash2php--variables)
+* [`options`](#-hash2stuff--hash2php--options)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2php--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="variables"></a>`variables`
+##### <a name="-hash2stuff--hash2php--variables"></a>`variables`
 
 Data type: `Variant[Hash, Hash2stuff::Php_settings]`
 
 Either a hash or Hash2stuff::Php_settings.
 
-##### <a name="options"></a>`options`
+##### <a name="-hash2stuff--hash2php--options"></a>`options`
 
 Data type: `Hash`
 
@@ -289,7 +289,7 @@ Hash of optional values to pass to the "hash2php" function.  See function for de
 
 Default value: `{}`
 
-### <a name="hash2stuffhash2properties"></a>`hash2stuff::hash2properties`
+### <a name="hash2stuff--hash2properties"></a>`hash2stuff::hash2properties`
 
 Defined type provides an implementation of the hash2properties function, creating a Java properties file from the input hash
 
@@ -317,23 +317,23 @@ hash2stuff::hash2properties { 'namevar':
 
 The following parameters are available in the `hash2stuff::hash2properties` defined type:
 
-* [`file_props`](#file_props)
-* [`data_hash`](#data_hash)
-* [`options`](#options)
+* [`file_props`](#-hash2stuff--hash2properties--file_props)
+* [`data_hash`](#-hash2stuff--hash2properties--data_hash)
+* [`options`](#-hash2stuff--hash2properties--options)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2properties--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="data_hash"></a>`data_hash`
+##### <a name="-hash2stuff--hash2properties--data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the properties file.
 
-##### <a name="options"></a>`options`
+##### <a name="-hash2stuff--hash2properties--options"></a>`options`
 
 Data type: `Hash`
 
@@ -341,7 +341,7 @@ Hash of optional values to pass to the "hash2properties" function.  See function
 
 Default value: `{}`
 
-### <a name="hash2stuffhash2xml"></a>`hash2stuff::hash2xml`
+### <a name="hash2stuff--hash2xml"></a>`hash2stuff::hash2xml`
 
 Defined type provides an implementation of the hash2xml function, creating a XML File.
 
@@ -370,17 +370,17 @@ hash2stuff::hash2xml { '/path/to/settings.xml':
 
 The following parameters are available in the `hash2stuff::hash2xml` defined type:
 
-* [`file_props`](#file_props)
-* [`data`](#data)
-* [`options`](#options)
+* [`file_props`](#-hash2stuff--hash2xml--file_props)
+* [`data`](#-hash2stuff--hash2xml--data)
+* [`options`](#-hash2stuff--hash2xml--options)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2xml--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="data"></a>`data`
+##### <a name="-hash2stuff--hash2xml--data"></a>`data`
 
 Data type: `Hash[String, Any]`
 
@@ -388,7 +388,7 @@ A hash to format using xml.
 
 Default value: `{}`
 
-##### <a name="options"></a>`options`
+##### <a name="-hash2stuff--hash2xml--options"></a>`options`
 
 Data type: `Hash`
 
@@ -396,7 +396,7 @@ Hash of optional values to pass to the "hash2php" function.  See function for de
 
 Default value: `{}`
 
-### <a name="hash2stuffhash2yaml"></a>`hash2stuff::hash2yaml`
+### <a name="hash2stuff--hash2yaml"></a>`hash2stuff::hash2yaml`
 
 Defined type provides an implementation of the hash2yaml function, creating a YAML file from the input hash
 
@@ -424,23 +424,23 @@ hash2stuff::hash2yaml { 'namevar':
 
 The following parameters are available in the `hash2stuff::hash2yaml` defined type:
 
-* [`file_props`](#file_props)
-* [`data_hash`](#data_hash)
-* [`options`](#options)
+* [`file_props`](#-hash2stuff--hash2yaml--file_props)
+* [`data_hash`](#-hash2stuff--hash2yaml--data_hash)
+* [`options`](#-hash2stuff--hash2yaml--options)
 
-##### <a name="file_props"></a>`file_props`
+##### <a name="-hash2stuff--hash2yaml--file_props"></a>`file_props`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### <a name="data_hash"></a>`data_hash`
+##### <a name="-hash2stuff--hash2yaml--data_hash"></a>`data_hash`
 
 Data type: `Hash`
 
 Hash representation of the YAML file.
 
-##### <a name="options"></a>`options`
+##### <a name="-hash2stuff--hash2yaml--options"></a>`options`
 
 Data type: `Hash`
 
@@ -616,6 +616,13 @@ Both variants of the function support the same options in the options hash:
   No comment markings are added. Make sure to add them yourselves.
 
   Defaults to `// THIS FILE IS CONTROLLED BY PUPPET`
+
+* **`footer`** (`String`):
+
+  Configure the footer to be shown at the bottom of the file.
+  No comment markings are added. Make sure to add them yourselves.
+
+  Defaults to `nil` (no footer)
 
 * **`php_open`** (`Boolean`): Flag to include the opening `<?php`. Defaults to `true`.
 * **`php_close`** (`Boolean`): Flag to include the closing `?>`. Defaults to `false`.
@@ -856,7 +863,7 @@ hash2xml({
   '?xml version="1.0" encoding="UTF-8"?' => false,
   'collection version="1"' => {
     'name' => 'Puppetlabs',
-    'no_text attribute="foobar"' => false,
+    'no_text attribute="foobar"' => true,
     'properties' => {
       'foo' => 'bar',
       'bar' => 'foo',
@@ -879,6 +886,7 @@ hash2xml({
 # <?xml version="1.0" encoding="UTF-8"?>
 # <collection version="1">
 #   <name>Puppetlabs</name>
+#   <no_text attribute="foobar"/>
 #   <properties>
 #     <foo>bar</foo>
 #     <bar>foo</bar>
@@ -917,7 +925,7 @@ hash2xml({
   '?xml version="1.0" encoding="UTF-8"?' => false,
   'collection version="1"' => {
     'name' => 'Puppetlabs',
-    'no_text attribute="foobar"' => false,
+    'no_text attribute="foobar"' => true,
     'properties' => {
       'foo' => 'bar',
       'bar' => 'foo',
@@ -940,6 +948,7 @@ hash2xml({
 # <?xml version="1.0" encoding="UTF-8"?>
 # <collection version="1">
 #   <name>Puppetlabs</name>
+#   <no_text attribute="foobar"/>
 #   <properties>
 #     <foo>bar</foo>
 #     <bar>foo</bar>
@@ -1011,7 +1020,7 @@ A hash of options to control YAML file format
 
 ## Data types
 
-### <a name="hash2stuffphp_settings"></a>`Hash2stuff::Php_settings`
+### <a name="Hash2stuff--Php_settings"></a>`Hash2stuff::Php_settings`
 
 Data type to represent php settings:
   [ { 'name'  => 'name1',
@@ -1028,8 +1037,8 @@ Alias of
 
 ```puppet
 Array[Struct[{
-  name  => Variant[String[1], Array[String[1], 1]],
-  value => Any,
+      name  => Variant[String[1], Array[String[1], 1]],
+      value => Any,
 }]]
 ```
 
