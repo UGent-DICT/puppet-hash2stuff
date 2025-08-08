@@ -13,17 +13,8 @@ Puppet::Functions.create_function(:hash2yaml) do
   require 'yaml'
 
   def yaml(input, options = {})
-    settings = {
-      'header' => '',
-    }
+    return "#{options['header']}\n#{input.to_yaml}" unless options['header'].to_s.empty?
 
-    settings.merge!(options)
-
-    output = if settings['header'].to_s.empty?
-               input.to_yaml
-             else
-               "#{settings['header']}\n#{input.to_yaml}"
-             end
-    output
+    input.to_yaml
   end
 end
