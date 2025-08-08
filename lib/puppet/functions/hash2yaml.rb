@@ -13,8 +13,14 @@ Puppet::Functions.create_function(:hash2yaml) do
   require 'yaml'
 
   def yaml(input, options = {})
-    return "#{options['header']}\n#{input.to_yaml}" unless options['header'].to_s.empty?
+    output = options['symbolize_keys'] ? deep_transform_keys(input) : input
 
-    input.to_yaml
+    return "#{options['header']}\n#{output.to_yaml}" unless options['header'].to_s.empty?
+
+    output.to_yaml
+  end
+
+  def deep_transform_keys(hash)
+    hash.transform_keys(&:to_sym).transform_values { |v| v.is_a?(Hash) ? deep_transform_keys(v) : v }
   end
 end

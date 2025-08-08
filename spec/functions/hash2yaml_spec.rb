@@ -16,7 +16,7 @@ describe 'hash2yaml' do
     'awesome' => true,
   }
 
-  context 'default setting' do
+  context 'default options' do
     # https://github.com/hallettj/zaml/issues/3
     # https://tickets.puppetlabs.com/browse/PUP-3120
     # https://tickets.puppetlabs.com/browse/PUP-5630
@@ -52,7 +52,7 @@ EOS
     it { is_expected.to run.with_params(example_input).and_return(output) }
   end
 
-  context 'custom settings' do
+  context 'header option' do
     settings = {
       'header' => '# THIS FILE IS CONTROLLED BY PUPPET',
     }
@@ -82,6 +82,40 @@ mysql:
   user: root
   pass: setec-astronomy
 awesome: true
+EOS
+             end
+
+    it { is_expected.to run.with_params(example_input, settings).and_return(output) }
+  end
+
+  context 'symbolize_keys option' do
+    settings = {
+      'symbolize_keys' => true,
+    }
+
+    output = if Puppet.version.to_f < 4.0
+               <<-EOS
+---
+  :domain: example.com
+  :mysql:
+    :hosts:
+      - "192.0.2.2"
+      - "192.0.2.4"
+    :user: root
+    :pass: setec-astronomy
+  :awesome: true
+EOS
+             else
+               <<-EOS
+---
+:domain: example.com
+:mysql:
+  :hosts:
+  - 192.0.2.2
+  - 192.0.2.4
+  :user: root
+  :pass: setec-astronomy
+:awesome: true
 EOS
              end
 
